@@ -18,9 +18,9 @@ install:
   - npm install -g yarn
 
 script:
-  - yarn install
+  - yarn install --no-progress
   - yarn lint
-  - yarn build --base-href https://jnrndn.github.io/pwa-push-notifications
+  - yarn build --prod --base-href https://jnrndn.github.io/pwa-push-notifications/ --no-progress
 deploy:
   provider: pages
   skip_cleanup: true
