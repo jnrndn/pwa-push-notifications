@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - "9"
+dist: trusty
+sudo: false
+
+# safelist
+branches:
+  only:
+  - master
+  - develop
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install -g yarn
+
+script:
+  - yarn install
+  - yarn lint
+  - yarn build --base-href https://jnrndn.github.io/pwa-push-notifications
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/ng-pwa-push-notifications
+  on:
+    branch: master
