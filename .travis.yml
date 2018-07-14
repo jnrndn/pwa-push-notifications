@@ -20,7 +20,7 @@ install:
 script:
   - yarn --no-progress
   - yarn lint
-  - yarn build --prod --base-href ./ --no-progress
+  - yarn build --base-href ./ --no-progress
 deploy:
   provider: pages
   skip_cleanup: true
