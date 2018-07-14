@@ -1,11 +1,11 @@
 {
-  "name": "ng-pwa-push-notifications",
-  "short_name": "ng-pwa-push-notifications",
+  "name": "PWA push notifications",
+  "short_name": "PWA + push notif",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "https://jnrndn.github.io/pwa-push-notifications/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
