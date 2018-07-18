@@ -7,6 +7,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
+import { PushNotificationService } from './service/pushNotification.service';
+import { FireBaseConfigService } from './service/fireBaseConfig.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { FormComponent } from './form/form.component';
     MatInputModule,
     MatSlideToggleModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [ PushNotificationService, FireBaseConfigService ],
+  bootstrap: [ AppComponent ],
 })
 export class AppModule { }
