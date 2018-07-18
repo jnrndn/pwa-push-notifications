@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
+  color: string = 'accent';
+  checked: boolean = false;
+  disabled: boolean = false;
+  status: string = 'Subscribe';
+
   constructor() { }
 
   ngOnInit() {

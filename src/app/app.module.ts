@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCardModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatInputModule, MatSlideToggleModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -20,6 +20,7 @@ import { FormComponent } from './form/form.component';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
