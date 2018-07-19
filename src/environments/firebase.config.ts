@@ -5,6 +5,7 @@ export const firebaseConfig: FirebaseConfigInterface = {
     projectId: 'pwa-push-notifications-108e3',
     storageBucket: 'pwa-push-notifications-108e3.appspot.com',
     messagingSenderId: '446519166896',
+    VAPID_PUBLIC_KEY: 'BH3yDtnbMpNLXslz_enW4D05HP09CmovtIKTuQpJYWYfQ0YFIL0mkQ55jGjplpR2aKvTMDDGYoAxGez1W_Yhqmw',
 };
 
 
@@ -15,4 +16,5 @@ export interface FirebaseConfigInterface {
     projectId: string;
     storageBucket: string;
     messagingSenderId: string;
+    VAPID_PUBLIC_KEY: string;
 }
