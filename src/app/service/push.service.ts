@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
-import { FireBaseConfigService } from './fireBaseConfig.service';
+import { firebaseConfig } from '../../environments/firebase.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PushService {
 
-  private API_URL: string;
-
-  constructor(private swPush: SwPush, private firebaseconf: FireBaseConfigService) {
-    this.API_URL = this.firebaseconf.get('authDomain');
+  constructor(private swPush: SwPush) {
   }
 
-  addDubscriber() {
+  addSubscriber() {
+    console.log('add subcriber to push notification');
 
+    const serverPublicKey = firebaseConfig.VAPID_PUBLIC_KEY;
+    this.swPush.requestSubscription({
+      serverPublicKey,
+    })
+      .then((pushSubcription: PushSubscription) => {
+        console.log('Request subscription', pushSubcription.endpoint);
+      })
+      .catch((error) => {
+        console.log('Subcription request failed', error);
+      });
   }
+
 }
