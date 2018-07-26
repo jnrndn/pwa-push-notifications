@@ -19,8 +19,10 @@ export class FormComponent implements OnInit {
   constructor(private pushService: PushService) { }
 
   ngOnInit() {
-    checkedSubject.subscribe((payload) => this.checked = payload);
-    this.status = (this.checked) ? '' : 'not';
+    checkedSubject.subscribe((payload) => {
+      this.checked = payload;
+      this.status = (this.checked) ? '' : 'not';
+    });
   }
 
   onToggle(event) {

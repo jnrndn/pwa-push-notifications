@@ -1,6 +1,6 @@
 {
   "name": "PWA push notifications",
-  "short_name": "PWA + push notif",
+  "short_name": "PWA + push",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
