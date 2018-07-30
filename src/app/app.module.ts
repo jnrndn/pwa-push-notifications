@@ -11,15 +11,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule, SwPush, SwUpdate } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
-import * as firebase from 'firebase';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
-import { firebaseConfig } from '../environments/firebase.config';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
+import { MessagingService } from './service/messaging.service';
 import { PushService } from './service/push.service';
 
-firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,29 +27,21 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.config, 'push'),
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+    AngularFirestoreModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatSlideToggleModule,
     MatSnackBarModule,
   ],
-  providers: [ PushService ],
-  bootstrap: [ AppComponent ],
+  providers: [PushService, MessagingService],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 
   constructor(swUpdate: SwUpdate, swPush: SwPush, snackBar: MatSnackBar) {
-
-
-    if (swPush.isEnabled) {
-      console.log('push is enabled');
-      navigator.serviceWorker
-        .ready
-        .then((registration) => firebase.messaging().useServiceWorker(registration));
-    }
-
     swUpdate.available.subscribe((update) => {
       console.log('update availabe', update);
       const snack = snackBar.open('Your app is not up-to-date', 'Reload');
