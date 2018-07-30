@@ -1,9 +1,10 @@
 {
   "name": "PWA push notifications",
-  "short_name": "PWA + push notif",
+  "short_name": "PWA + push",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
+  "gcm_sender_id": "103953800507",
   "scope": "/",
   "start_url": "https://jnrndn.github.io/pwa-push-notifications/",
   "icons": [
