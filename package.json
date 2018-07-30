@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --aot",
     "build": "ng build --prod --aot --base-href ./",
+    "local": "ng build --prod --aot --base-href ./ && cd dist/ng-pwa-push-notifications && http-server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -36,6 +37,7 @@
     "@angular/cli": "~6.1.1",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
+    "@firebase/app-types": "^0.3.2",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.5.3",

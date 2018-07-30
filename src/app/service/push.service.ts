@@ -5,32 +5,32 @@ import { take } from 'rxjs/operators';
 
 import { firebaseConfig } from '../../environments/firebase.config';
 import { checkedSubject } from '../helpers/app.helpers';
+import { MessagingService } from './messaging.service';
 
 @Injectable()
 export class PushService {
 
-
-  constructor(private swPush: SwPush, private snackBar: MatSnackBar) { }
+  constructor(
+    private swPush: SwPush,
+    private snackBar: MatSnackBar,
+    private mesaggeService: MessagingService,
+  ) { }
 
   addSubscriber() {
-    console.log('add subcriber to push notification');
     const serverPublicKey = firebaseConfig.VAPID_PUBLIC_KEY;
-
     this.swPush.requestSubscription({
       serverPublicKey,
     })
-      .then((pushSubcription: PushSubscription) => {
-        console.log('Subscription request allowed', pushSubcription.toJSON());
-        checkedSubject.next(true);
-        // TODO: save user token to firebase
-        this.snackBar.open('Push notifications are enabled', null, {
+      .then((pushSubcription) => {
+        this.mesaggeService.saveData(pushSubcription.toJSON());
+        this.snackBar.open('Notifications are enabled', null, {
           duration: 2000,
         });
+        checkedSubject.next(true);
       })
       .catch((error) => {
-        console.log('Subcription request denied', error);
         checkedSubject.next(false);
-        this.snackBar.open('Push notifications are disabled', null, {
+        this.snackBar.open('Notifications are disabled', null, {
           duration: 2000,
         });
       });
@@ -55,4 +55,7 @@ export class PushService {
     });
   }
 
+  getSubscription() {
+    return this.swPush.subscription;
+  }
 }

@@ -1,12 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-
 import { PushService } from './service/push.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ],
+  styleUrls: ['./app.component.scss'],
 })
 
 
