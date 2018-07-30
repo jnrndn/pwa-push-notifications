@@ -13,7 +13,7 @@ export class PushService {
   constructor(
     private swPush: SwPush,
     private snackBar: MatSnackBar,
-    private mesaggeService: MessagingService,
+    private messagingService: MessagingService,
   ) { }
 
   addSubscriber() {
@@ -22,13 +22,14 @@ export class PushService {
       serverPublicKey,
     })
       .then((pushSubcription) => {
-        this.mesaggeService.saveData(pushSubcription.toJSON());
+        this.messagingService.saveData(pushSubcription.toJSON());
         this.snackBar.open('Notifications are enabled', null, {
           duration: 2000,
         });
         checkedSubject.next(true);
       })
       .catch((error) => {
+        console.log('error', error);
         checkedSubject.next(false);
         this.snackBar.open('Notifications are disabled', null, {
           duration: 2000,
@@ -37,13 +38,11 @@ export class PushService {
   }
 
   removeSubscriber() {
-    this.swPush.subscription.pipe(
-      take(1),
-    )
+    this.swPush.subscription
       .subscribe((pushSubscription) => {
         console.log('push sub', pushSubscription.toJSON(), 'will be removed');
-
         // TODO: remove user token from firebase
+        this.messagingService.removeUser(pushSubscription);
       });
   }
 

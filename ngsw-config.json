@@ -39,12 +39,7 @@
     },
     {
       "name": "api-performance",
-      "urls": [
-        "/",
-        "/jobs",
-        "/show",
-        "/ask"
-      ],
+      "urls": [],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "1d",

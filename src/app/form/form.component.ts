@@ -27,6 +27,8 @@ export class FormComponent implements OnInit {
 
   onToggle(event) {
     this.status = (event.checked) ? '' : 'not';
+    console.log('checked:', event.checked);
+
     if (event.checked) {
       this.pushService.addSubscriber();
     } else {
