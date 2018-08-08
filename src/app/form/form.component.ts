@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { checkedSubject } from '../helpers/app.helpers';
 import { PushService } from '../service/push.service';
+import { MessagingService } from '../service/messaging.service';
 
 @Component({
   selector: 'app-form',
@@ -10,13 +11,16 @@ import { PushService } from '../service/push.service';
 })
 export class FormComponent implements OnInit {
 
-
+  message: string;
   color: string = 'accent';
   checked: boolean = false;
   disabled: boolean = false;
   status: string = 'not';
 
-  constructor(private pushService: PushService) { }
+  constructor(
+    private pushService: PushService,
+    private messagingService: MessagingService,
+  ) { }
 
   ngOnInit() {
     checkedSubject.subscribe((payload) => {
@@ -34,6 +38,11 @@ export class FormComponent implements OnInit {
     } else {
       this.pushService.removeSubscriber();
     }
+  }
+
+  onSubmit(){
+    this.messagingService.sendMessage(this.message)
+    this.message = '';
   }
 
 }

@@ -6,9 +6,11 @@ import { map, filter, tap } from 'rxjs/operators';
 export class MessagingService {
 
   private pushUsersCollection: AngularFirestoreCollection;
+  private messageCollection: AngularFirestoreCollection;
 
   constructor(private afs: AngularFirestore) {
     this.pushUsersCollection = this.afs.collection('pushUsers');
+    this.messageCollection = this.afs.collection('pushMessages');
 
   }
 
@@ -33,5 +35,13 @@ export class MessagingService {
         console.log('x', x);
       }),
     );
+  }
+
+  sendMessage(message: string){
+    const id = this.afs.createId();
+    const item = { id, message};
+    this.messageCollection.doc(id).set(item);
+    console.log('message saved', message);
+    
   }
 }

@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { MessagingService } from './service/messaging.service';
 import { PushService } from './service/push.service';
+import { FormsModule } from '../../node_modules/@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PushService } from './service/push.service';
     MatInputModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    FormsModule,
   ],
   providers: [PushService, MessagingService],
   bootstrap: [AppComponent],
