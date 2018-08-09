@@ -40,8 +40,8 @@ export class FormComponent implements OnInit {
     }
   }
 
-  onSubmit(){
-    this.messagingService.sendMessage(this.message)
+  onSubmit() {
+    this.messagingService.sendMessage(this.message);
     this.message = '';
   }
 

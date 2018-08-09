@@ -37,11 +37,11 @@ export class MessagingService {
     );
   }
 
-  sendMessage(message: string){
+  sendMessage(message: string) {
     const id = this.afs.createId();
     const item = { id, message};
     this.messageCollection.doc(id).set(item);
     console.log('message saved', message);
-    
+
   }
 }
