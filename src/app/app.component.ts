@@ -16,9 +16,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  constructor(private pushService: PushService) {
-    this.pushService.addSubscriber();
-  }
+  constructor(private pushService: PushService) {  }
 
   ngOnInit() {
     this.pushService.showMessage();

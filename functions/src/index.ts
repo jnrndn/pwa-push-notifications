@@ -1,8 +1,16 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+admin.initializeApp();
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+exports.sendMessage = functions.firestore
+    .document(`/pushMessages/{id}`)
+    .onCreate((snap, context) => {
+        const data = snap.data();
+        console.log('context', context);
+        
+
+        const message = data.message;
+
+        console.log('message', message);
+        return;
+    });
