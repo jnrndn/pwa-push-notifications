@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Write your message</mat-card-title>
+      <mat-card-subtitle>The message below will send a push notification</mat-card-subtitle>
+    </mat-card-header>
+    <form (ngSubmit)="onSubmit()"  class="example-form">
+    <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput
+            id="message"
+            name="message"
+            [(ngModel)]= "message"
+            placeholder="Your message here">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button
+        color="primary">Send</button>
+      </mat-card-actions>
+    </form>
+    </mat-card>
+</div>

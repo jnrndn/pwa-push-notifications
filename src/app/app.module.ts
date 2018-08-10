@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -9,21 +10,24 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule, SwPush, SwUpdate } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
+import { AdminMessageComponent } from './admin-message/admin-message.component';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { MessagingService } from './service/messaging.service';
 import { PushService } from './service/push.service';
-import { FormsModule } from '../../node_modules/@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
+    AdminMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,15 +35,16 @@ import { FormsModule } from '../../node_modules/@angular/forms';
     AngularFireModule.initializeApp(environment.config, 'push'),
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     AngularFirestoreModule,
+    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    FormsModule,
+    AppRoutingModule,
   ],
-  providers: [PushService, MessagingService],
-  bootstrap: [AppComponent],
+  providers: [ PushService, MessagingService ],
+  bootstrap: [ AppComponent ],
 })
 export class AppModule {
 

@@ -59,7 +59,7 @@ export class PushService {
 
   showMessage() {
     console.log('subcribing to messages');
-    // FIXME: This still remind to test 
+    // FIXME: This still remind to test
     this.swPush.messages.subscribe((message) => {
       console.log('incoming message', message);
     });
