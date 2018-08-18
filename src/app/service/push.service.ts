@@ -41,10 +41,10 @@ export class PushService {
       })
       .catch((error) => {
         console.log('error', error);
-        checkedSubject.next(false);
         this.snackBar.open('Notifications are disabled', null, {
           duration: 2000,
         });
+        checkedSubject.next(false);
       });
   }
 

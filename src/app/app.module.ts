@@ -10,24 +10,27 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule, SwPush, SwUpdate } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
 import { AdminMessageComponent } from './admin-message/admin-message.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
+import { AuthGuardService } from './service/auth-guard.service';
 import { MessagingService } from './service/messaging.service';
 import { PushService } from './service/push.service';
-import { AppRoutingModule } from './app-routing.module';
+import { MessageComponent } from './admin-message/message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     AdminMessageComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { AppRoutingModule } from './app-routing.module';
     AngularFireModule.initializeApp(environment.config, 'push'),
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
@@ -43,7 +47,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatSnackBarModule,
     AppRoutingModule,
   ],
-  providers: [ PushService, MessagingService ],
+  providers: [ PushService, MessagingService, AuthGuardService ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule {

@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     checkedSubject.subscribe((payload) => {
       this.checked = payload;
+      console.log(this.checked);
       this.status = (this.checked) ? '' : 'not';
     });
   }
