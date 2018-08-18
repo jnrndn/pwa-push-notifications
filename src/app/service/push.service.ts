@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { SwPush } from '@angular/service-worker';
-import { take } from 'rxjs/operators';
 
 import { firebaseConfig } from '../../environments/firebase.config';
 import { checkedSubject } from '../helpers/app.helpers';
@@ -10,14 +9,26 @@ import { MessagingService } from './messaging.service';
 @Injectable()
 export class PushService {
 
+  private pushSub: PushSubscription;
+
   constructor(
     private swPush: SwPush,
     private snackBar: MatSnackBar,
     private messagingService: MessagingService,
-  ) { }
+  ) {
+    this.swPush.subscription
+      .subscribe((sub: PushSubscription) => {
+        this.pushSub = sub;
+      });
+  }
 
   addSubscriber() {
     const serverPublicKey = firebaseConfig.VAPID_PUBLIC_KEY;
+
+    if (this.pushSub) {
+      return;
+    }
+
     this.swPush.requestSubscription({
       serverPublicKey,
     })
@@ -30,10 +41,10 @@ export class PushService {
       })
       .catch((error) => {
         console.log('error', error);
-        checkedSubject.next(false);
         this.snackBar.open('Notifications are disabled', null, {
           duration: 2000,
         });
+        checkedSubject.next(false);
       });
   }
 
@@ -48,7 +59,7 @@ export class PushService {
 
   showMessage() {
     console.log('subcribing to messages');
-
+    // FIXME: This still remind to test
     this.swPush.messages.subscribe((message) => {
       console.log('incoming message', message);
     });

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -11,19 +12,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule, SwPush, SwUpdate } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
+import { AdminMessageComponent } from './admin-message/admin-message.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
+import { AuthGuardService } from './service/auth-guard.service';
 import { MessagingService } from './service/messaging.service';
 import { PushService } from './service/push.service';
-import { FormsModule } from '../../node_modules/@angular/forms';
+import { MessageComponent } from './admin-message/message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
+    AdminMessageComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,15 +38,17 @@ import { FormsModule } from '../../node_modules/@angular/forms';
     AngularFireModule.initializeApp(environment.config, 'push'),
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
     AngularFirestoreModule,
+    AngularFireAuthModule,
+    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    FormsModule,
+    AppRoutingModule,
   ],
-  providers: [PushService, MessagingService],
-  bootstrap: [AppComponent],
+  providers: [ PushService, MessagingService, AuthGuardService ],
+  bootstrap: [ AppComponent ],
 })
 export class AppModule {
 

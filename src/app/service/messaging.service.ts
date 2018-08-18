@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { map, filter, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class MessagingService {
@@ -39,7 +39,7 @@ export class MessagingService {
 
   sendMessage(message: string) {
     const id = this.afs.createId();
-    const item = { id, message};
+    const item = { id, message };
     this.messageCollection.doc(id).set(item);
     console.log('message saved', message);
 
